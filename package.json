@@ -21,6 +21,10 @@
   "engines": {
     "node": "0.10.33"
   },
+  "repository": {
+      "type" : "git",
+      "url" : "https://github.com/rgeraldporter/spyrr.git"
+  },
   "keywords": [
     "mock requests",
     "controller tests",
