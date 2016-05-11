@@ -1,9 +1,7 @@
 # SPY R/R
 
-Spy on your inner controller processes, create and test actions against server request/response without spinning up a live instance, using the supertest API.should reject an invalid auth token
-, function() {
-    
-}
+Spy on your inner controller processes, create and test actions against server request/response without spinning up a live instance, using the supertest API.
+
 # Usage
 
 ## Import
