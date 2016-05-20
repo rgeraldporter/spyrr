@@ -49,7 +49,7 @@ describe( 'POST /endpoint', function() {
 
 # Build
 
-**Note: there are no tests yet. These are forthcoming.**
+**Note: there are only minimal tests thus far. More are on the way!**
 
 You can build easily with `gulp`, which will test then build. To just test, run `gulp test`.
 

@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (action) {
 
-    return new _test.Test(action);
+    return new _Test.Test(action);
 };
 
-var _test = require('./test');
+var _Test = require('./Test.class');
 
 ;

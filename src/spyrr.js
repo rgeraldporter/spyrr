@@ -1,4 +1,4 @@
-import { Test } from './test';
+import { Test } from './Test.class';
 
 export default function( action ) {
 
