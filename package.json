@@ -13,6 +13,7 @@
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.3.0",
+    "gulp-jsdoc3": "^0.2.1",
     "gulp-rename": "^1.2.2",
     "gulp-shell": "^0.5.2",
     "run-sequence": "^1.1.5",
@@ -22,8 +23,8 @@
     "node": "0.10.33"
   },
   "repository": {
-      "type" : "git",
-      "url" : "https://github.com/rgeraldporter/spyrr.git"
+    "type": "git",
+    "url": "https://github.com/rgeraldporter/spyrr.git"
   },
   "keywords": [
     "mock requests",
@@ -47,4 +48,3 @@
     "test": "gulp test"
   }
 }
-

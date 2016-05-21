@@ -196,8 +196,7 @@ export class Test {
     }
 
     /**
-     * Defer invoking superagent's `.end()` until
-     * the server is listening.
+     * Defers the action to the end of the chain
      *
      * @param {Function} fn
      * @api public
