@@ -17,19 +17,19 @@ or
 ## Test a request/response, and spy on inner methods
 
 ```
-describe( 'POST /endpoint', function() {
+describe( 'POST /endpoint', () => {
 
-    var someTestObject = { test: true };
+    let someTestObject = { test: true };
 
     beforeEach( function() {
 
-        spyOn( controller.endpoint, 'checkAuthorization' ).and.callFake( function() => {
+        spyOn( controller.endpoint, 'checkAuthorization' ).and.callFake( () => {
 
             return false;
         });
     });
 
-    it( 'should reject requests with an invalid auth token', function( done ) {
+    it( 'should reject requests with an invalid auth token', done => {
 
         mockRequest( controller.endpoint )
             .params( { path: 'testpath', id: 'my-test' } )
