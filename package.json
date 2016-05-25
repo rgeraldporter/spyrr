@@ -3,7 +3,7 @@
   "author": "Rob Porter",
   "description": "Create and test actions against server request/response without spinning up a live server",
   "readmeFilename": "README.md",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": "./app/spyrr.js",
   "devDependencies": {
     "babel-cli": "^6.6.5",
