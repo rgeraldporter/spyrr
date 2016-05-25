@@ -16,7 +16,7 @@ or
 
 ## Test a request/response, and spy on inner methods
 
-```
+```javascript
 import controller from './routes/endpoint.js';
 
 describe( 'POST /endpoint', () => {
