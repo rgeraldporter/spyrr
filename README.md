@@ -17,6 +17,8 @@ or
 ## Test a request/response, and spy on inner methods
 
 ```
+import controller from './routes/endpoint.js';
+
 describe( 'POST /endpoint', () => {
 
     let someTestObject = { test: true };
