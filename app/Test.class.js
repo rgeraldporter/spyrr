@@ -277,6 +277,7 @@ var Test = function () {
             that.res.send = send;
             that.res.json = send;
             that.res.status = status;
+            that.res.headers = headers;
 
             end(that.req, that.res);
 
@@ -292,6 +293,26 @@ var Test = function () {
 
                 that.res.status = status;
                 that.res.statusCode = status;
+
+                return that.res;
+            }
+
+            function headers(headers) {
+
+                var lcHeaders = {};
+
+                Object.keys(headers).forEach(function (headerKey) {
+
+                    if (typeof headers[headerKey] === 'string') {
+
+                        lcHeaders[headerKey.toLowerCase()] = headers[headerKey].toLowerCase();
+                    } else {
+
+                        lcHeaders[headerKey.toLowerCase()] = headers[headerKey];
+                    }
+                });
+
+                that.res.headers = lcHeaders;
 
                 return that.res;
             }
@@ -394,7 +415,7 @@ var Test = function () {
         value: function _assertHeader(header, res) {
 
             var field = header.name,
-                actual = res.header[field.toLowerCase()],
+                actual = res.headers[field.toLowerCase()],
                 fieldExpected = header.value;
 
             if (typeof actual === 'undefined') {
