@@ -9,7 +9,7 @@ describe( 'the Test class', () => {
 
     function mockControllerStatusSend( req, res ) {
         
-        res.status( 200 ).send({
+        res.status( 200 ).headers( { 'Content-Type': 'application/json' } ).send({
 
             success:        true
         });
@@ -139,6 +139,86 @@ describe( 'the Test class', () => {
 
         myTest.query( { queryTest: true } )
             .body( { bodyTest: true })
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBe( false );
+            })
+        ;
+    });
+
+    it( 'should pass query and body parameters chained together with headers', () => {
+
+        let myTest = new Test( mockControllerQueryBodyChain );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .expect( 'Content-Type', /json/ )
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBe( false );
+            })
+        ;
+    });
+
+    it( 'should fail if headers are not correct using regular expression matching', () => {
+
+        let myTest = new Test( mockControllerQueryBodyChain );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .expect( 'Content-Type', /sandwich/ )
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBeTruthy();
+            })
+        ;
+    });
+
+    it( 'should fail if headers are not correct using string matching', () => {
+
+        let myTest = new Test( mockControllerQueryBodyChain );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .expect( 'Content-Type', 'application/javascript' )
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBeTruthy();
+            })
+        ;
+    });
+
+    it( 'should pass if headers are correct using string matching, even if the case does not line up in the key', () => {
+
+        let myTest = new Test( mockControllerQueryBodyChain );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .expect( 'conTenT-TyPe', 'application/json' )
             .expect( 200 )
             .expect( res => {
 

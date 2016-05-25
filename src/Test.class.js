@@ -215,6 +215,7 @@ export class Test {
         that.res.send   = send;
         that.res.json   = send;
         that.res.status = status;
+        that.res.headers = headers;
 
         end( that.req, that.res ); 
 
@@ -230,6 +231,27 @@ export class Test {
 
             that.res.status         = status;
             that.res.statusCode     = status;
+
+            return that.res;
+        }
+
+        function headers( headers ) {
+
+            let lcHeaders = {};
+
+            Object.keys( headers ).forEach( headerKey => {
+
+                if ( typeof headers[ headerKey ] === 'string' ) {
+
+                    lcHeaders[ headerKey.toLowerCase() ] = headers[ headerKey ].toLowerCase();
+                }
+                else {
+
+                    lcHeaders[ headerKey.toLowerCase() ] = headers[ headerKey ];
+                }
+            });
+
+            that.res.headers        = lcHeaders;
 
             return that.res;
         }
@@ -325,7 +347,7 @@ export class Test {
     _assertHeader( header, res ) {
 
         const   field           = header.name,
-                actual          = res.header[ field.toLowerCase() ],
+                actual          = res.headers[ field.toLowerCase() ],
                 fieldExpected   = header.value
         ;
 
