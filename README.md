@@ -55,15 +55,19 @@ describe( 'POST /endpoint', () => {
 
 You can build easily with `gulp`, which will test then build. To just test, run `gulp test`.
 
+# Requirements
+
+Built to work with [jasmine](http://jasmine.github.io/), though it may work with other testing frameworks. 
+
 # Contribute
 
-Please fork the project, then use a pull request to make improvements and fixes. This is very new so there is likely to be many unknown issues.
+Please fork the project, then use a pull request to make improvements and fixes. This is very new so there is likely to be many undocumented issues, especially with non-jasmine frameworks.
 
-# Authors
+# Authors and Acknowledgements
 
 Written by [Rob Porter](https://github.com/rgeraldporter).
 
-Based on code from both [supertest](https://github.com/visionmedia/supertest) and [dupertest](https://github.com/TGOlson/dupertest). Thanks to [TJ Holowaychuk](https://github.com/tj) and [Tyler Olson](https://github.com/TGOlson) for these.
+Based upon both [supertest](https://github.com/visionmedia/supertest) and [dupertest](https://github.com/TGOlson/dupertest). Thanks to [TJ Holowaychuk](https://github.com/tj) and [Tyler Olson](https://github.com/TGOlson) for these.
 
 # License
 
