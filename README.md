@@ -1,6 +1,6 @@
 # SPY R/R
 
-Spy on your inner controller processes, create and test actions against server request/response without spinning up a live instance, using the supertest API.
+Spy on your inner controller processes, create and test actions against server request/response without spinning up a live instance, using the [supertest](https://github.com/visionmedia/supertest) API.
 
 # Usage
 
