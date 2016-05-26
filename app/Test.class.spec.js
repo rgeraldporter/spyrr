@@ -186,4 +186,18 @@ describe('the Test class', function () {
             expect(!!err).toBe(false);
         });
     });
+
+    it('should allow the extension of the response', function () {
+
+        var myTest = new _Test.Test(mockControllerQueryBodyChain);
+
+        myTest.query({ queryTest: true }).body({ bodyTest: true }).headers({ 'Content-Type': 'application/json' }).extendRes({ test: 'test' }).expect(200).expect(function (res) {
+
+            res.body.should.have.property('success');
+            res.should.have.property('test');
+        }).end(function (err, res) {
+
+            expect(!!err).toBe(false);
+        });
+    });
 });

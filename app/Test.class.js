@@ -108,6 +108,9 @@ var Test = function () {
 
         /**
          * Set the files in the request
+         * Note: In Express 4, req.files is no longer available on the req object by default. 
+         *     To access uploaded files on the req.files object, use multipart-handling middleware 
+         *     like busboy, multer, formidable, multiparty, connect-multiparty, or pez.
          * @param  {Object} files
          * @return {Test}
          */
@@ -121,7 +124,7 @@ var Test = function () {
         }
 
         /**
-         * [extendReq description]
+         * Extend the request object further
          * @param  {*} data 
          * @return {Test}
          */
@@ -135,7 +138,7 @@ var Test = function () {
         }
 
         /**
-         * [extendRes description]
+         * Extend the resource object further
          * @param  {*} data 
          * @return {Test}
          */
@@ -519,4 +522,17 @@ function error(msg, expected, actual) {
     err.showDiff = true;
 
     return err;
+}
+
+/**
+ * Extends an object
+ * @param  {Object} target
+ * @param  {*} data
+ */
+function extend(target, data) {
+
+    for (var i in data) {
+
+        target[i] = data[i];
+    }
 }

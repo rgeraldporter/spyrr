@@ -230,4 +230,25 @@ describe( 'the Test class', () => {
             })
         ;
     });
+
+    it( 'should allow the extension of the response', () => {
+
+        let myTest = new Test( mockControllerQueryBodyChain );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .extendRes( { test: 'test' } )
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+                res.should.have.property( 'test' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBe( false );
+            })
+        ;
+    });
 });
