@@ -44,6 +44,15 @@ describe( 'the Test class', () => {
         }
     }
 
+    function mockControllerExtendReq( req, res ) {
+
+        res.status( 200 ).headers( { 'Content-Type': 'application/json' } ).send({
+
+            success:        true,
+            test:           req.test
+        });
+    }
+
     it( 'should handle response status if it is not matching', () => {
 
         let myTest = new Test( mockControllerStatusSend );
@@ -244,6 +253,28 @@ describe( 'the Test class', () => {
 
                 res.body.should.have.property( 'success' );
                 res.should.have.property( 'test' );
+            })
+            .end( ( err, res ) => {
+
+                expect( !! err ).toBe( false );
+            })
+        ;
+    });
+
+    it( 'should allow the extension of the request', () => {
+
+        let myTest = new Test( mockControllerExtendReq );
+
+        myTest.query( { queryTest: true } )
+            .body( { bodyTest: true })
+            .headers( { 'Content-Type': 'application/json' } )
+            .extendReq( { test: 'test' } )
+            .expect( 200 )
+            .expect( res => {
+
+                res.body.should.have.property( 'success' );
+                res.body.should.have.property( 'test' );
+                res.body.test.should.equal( 'test' );
             })
             .end( ( err, res ) => {
 

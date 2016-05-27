@@ -49,6 +49,15 @@ describe('the Test class', function () {
         }
     }
 
+    function mockControllerExtendReq(req, res) {
+
+        res.status(200).headers({ 'Content-Type': 'application/json' }).send({
+
+            success: true,
+            test: req.test
+        });
+    }
+
     it('should handle response status if it is not matching', function () {
 
         var myTest = new _Test.Test(mockControllerStatusSend);
@@ -195,6 +204,21 @@ describe('the Test class', function () {
 
             res.body.should.have.property('success');
             res.should.have.property('test');
+        }).end(function (err, res) {
+
+            expect(!!err).toBe(false);
+        });
+    });
+
+    it('should allow the extension of the request', function () {
+
+        var myTest = new _Test.Test(mockControllerExtendReq);
+
+        myTest.query({ queryTest: true }).body({ bodyTest: true }).headers({ 'Content-Type': 'application/json' }).extendReq({ test: 'test' }).expect(200).expect(function (res) {
+
+            res.body.should.have.property('success');
+            res.body.should.have.property('test');
+            res.body.test.should.equal('test');
         }).end(function (err, res) {
 
             expect(!!err).toBe(false);
