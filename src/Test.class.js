@@ -104,7 +104,7 @@ export class Test {
     }
 
     /**
-     * [next description]
+     * Allow for test of middleware controllers that may not actually return a response
      * @param  {Function} callback
      * @return {Test}
      */
@@ -115,7 +115,7 @@ export class Test {
     }
 
     /**
-     * [errNext description]
+     * Allows for error handling in middleware, expecting next( err ) to be called
      * @param  {Function} callback
      * @return {Test}
      */
