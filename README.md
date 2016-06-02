@@ -8,11 +8,15 @@ Spy on your inner controller processes, create and test actions against server r
 
 You can import either via CommonJS or ES6, depending on what you're using.
 
-`var mockRequest = require( 'spyrr' );`
+```javascript
+var mockRequest = require( 'spyrr' );
+```
 
 or 
 
-`import mockRequest from 'spyrr';`
+```javascript
+import mockRequest from 'spyrr';
+```
 
 ## Test a request/response, and spy on inner methods
 
