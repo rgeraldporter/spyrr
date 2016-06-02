@@ -207,7 +207,8 @@ export class Test {
     end( fn ) {
 
         let that    = this,
-            end     = this.action
+            end     = this.action,
+            next
         ;
 
         if ( ! end ) { 
@@ -220,7 +221,17 @@ export class Test {
         that.res.status = status;
         that.res.headers = headers;
 
-        end( that.req, that.res ); 
+        next = err => {
+
+            if ( err ) {
+
+                return callFn( that.errNextFn )( that.req, that.res );
+            }
+
+            return callFn( that.nextFn )( that.req, that.res );
+        }
+
+        end( that.req, that.res, next ); 
 
         return that;
 
@@ -436,7 +447,6 @@ export class Test {
  * @return {Error}
  * @api private
  */
-
 function error( msg, expected, actual ) {
 
     let err = new Error( msg );
@@ -459,4 +469,11 @@ function extend( target, data ) {
 
         target[ i ] = data[ i ];
     }
+}
+
+function callFn( fn ) {
+
+    function noop() {};
+
+    return fn || noop;
 }

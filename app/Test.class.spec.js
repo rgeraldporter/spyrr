@@ -224,4 +224,45 @@ describe('the Test class', function () {
             expect(!!err).toBe(false);
         });
     });
+
+    it('should add the next callback as a paramter', function () {
+
+        var myTest = new _Test.Test(mockControllerExtendReq),
+            fn = function fn(req, res) {};
+
+        myTest.next(fn);
+
+        expect(myTest.nextFn).not.toBeUndefined();
+    });
+
+    it('should send next() as a parameter to the controller', function () {
+
+        var myTest = new _Test.Test(mockControllerExtendReq),
+            fn = function fn(req, res) {};
+
+        myTest.action = function (req, res, next) {
+
+            expect(next).not.toBeUndefined();
+        };
+
+        myTest.next(fn).end();
+    });
+
+    it('should call next() with correct params', function () {
+
+        var myTest = new _Test.Test(mockControllerExtendReq);
+
+        myTest.action = function (req, res, next) {
+
+            next();
+        };
+
+        myTest.next(function (req, res) {
+
+            expect(req).not.toBeUndefined();
+            expect(res).not.toBeUndefined();
+            expect(req).toBe(myTest.req);
+            expect(res).toBe(myTest.res);
+        }).end();
+    });
 });

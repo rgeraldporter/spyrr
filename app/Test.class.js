@@ -152,7 +152,7 @@ var Test = function () {
         }
 
         /**
-         * [next description]
+         * Allow for test of middleware controllers that may not actually return a response
          * @param  {Function} callback
          * @return {Test}
          */
@@ -166,7 +166,7 @@ var Test = function () {
         }
 
         /**
-         * [errNext description]
+         * Allows for error handling in middleware, expecting next( err ) to be called
          * @param  {Function} callback
          * @return {Test}
          */
@@ -270,7 +270,8 @@ var Test = function () {
         value: function end(fn) {
 
             var that = this,
-                end = this.action;
+                end = this.action,
+                next = void 0;
 
             if (!end) {
 
@@ -282,7 +283,17 @@ var Test = function () {
             that.res.status = status;
             that.res.headers = headers;
 
-            end(that.req, that.res);
+            next = function next(err) {
+
+                if (err) {
+
+                    return callFn(that.errNextFn)(that.req, that.res);
+                }
+
+                return callFn(that.nextFn)(that.req, that.res);
+            };
+
+            end(that.req, that.res, next);
 
             return that;
 
@@ -512,6 +523,7 @@ var Test = function () {
  * @api private
  */
 
+
 exports.Test = Test;
 function error(msg, expected, actual) {
 
@@ -535,4 +547,11 @@ function extend(target, data) {
 
         target[i] = data[i];
     }
+}
+
+function callFn(fn) {
+
+    function noop() {};
+
+    return fn || noop;
 }

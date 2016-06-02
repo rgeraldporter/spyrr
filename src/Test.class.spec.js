@@ -282,4 +282,51 @@ describe( 'the Test class', () => {
             })
         ;
     });
+
+    it( 'should add the next callback as a paramter', () => {
+
+        let myTest      = new Test( mockControllerExtendReq ),
+            fn          = ( req, res ) => {}
+        ;
+
+        myTest.next( fn );
+
+        expect( myTest.nextFn ).not.toBeUndefined();
+    });
+
+    it( 'should send next() as a parameter to the controller', () => {
+
+        let myTest      = new Test( mockControllerExtendReq ),
+            fn          = ( req, res ) => {}
+        ;
+
+
+        myTest.action = ( req, res, next ) => {
+
+            expect( next ).not.toBeUndefined();
+        };
+
+        myTest.next( fn )
+            .end();
+    });
+
+    it( 'should call next() with correct params', () => {
+
+        let myTest      = new Test( mockControllerExtendReq );
+
+        myTest.action = ( req, res, next ) => {
+
+            next();
+        };
+
+        myTest.next( ( req, res ) => {
+
+                expect( req ).not.toBeUndefined();
+                expect( res ).not.toBeUndefined();
+                expect( req ).toBe( myTest.req );
+                expect( res ).toBe( myTest.res );
+            })
+            .end()
+        ;
+    });
 });
