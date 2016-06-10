@@ -303,10 +303,9 @@ var Test = function () {
                 that.assert(null, that.res, fn);
             }
 
-            function status(status) {
+            function status(statusCode) {
 
-                that.res.status = status;
-                that.res.statusCode = status;
+                that.res.statusCode = statusCode;
 
                 return that.res;
             }
@@ -354,7 +353,7 @@ var Test = function () {
             }
 
             // set unexpected superagent error if no other error has occurred.
-            if (!error && resError instanceof Error && (!res || resError.status !== res.status)) {
+            if (!error && resError instanceof Error && (!res || resError.status !== res.statusCode)) {
 
                 error = resError;
             }
@@ -468,15 +467,15 @@ var Test = function () {
         key: '_assertStatus',
         value: function _assertStatus(status, res) {
 
-            if (res.status !== status) {
+            if (res.statusCode !== status) {
 
                 var a = void 0,
                     b = void 0;
 
                 a = _http2.default.STATUS_CODES[status];
-                b = _http2.default.STATUS_CODES[res.status];
+                b = _http2.default.STATUS_CODES[res.statusCode];
 
-                return new Error('expected ' + status + ' "' + a + '", got ' + res.status + ' "' + b + '"');
+                return new Error('expected ' + status + ' "' + a + '", got ' + res.statusCode + ' "' + b + '"');
             }
         }
 

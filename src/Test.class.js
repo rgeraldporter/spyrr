@@ -241,10 +241,9 @@ export class Test {
             that.assert( null, that.res, fn );
         }
 
-        function status( status ) {
+        function status( statusCode ) {
 
-            that.res.status         = status;
-            that.res.statusCode     = status;
+            that.res.statusCode     = statusCode;
 
             return that.res;
         }
@@ -290,7 +289,7 @@ export class Test {
         }
 
         // set unexpected superagent error if no other error has occurred.
-        if ( ! error && resError instanceof Error && ( ! res || resError.status !== res.status ) ) {
+        if ( ! error && resError instanceof Error && ( ! res || resError.status !== res.statusCode ) ) {
 
             error = resError;
         }
@@ -399,14 +398,14 @@ export class Test {
      */
     _assertStatus( status, res ) {
 
-        if ( res.status !== status ) {
+        if ( res.statusCode !== status ) {
 
             let a, b;
 
             a = http.STATUS_CODES[ status ];
-            b = http.STATUS_CODES[ res.status ];
+            b = http.STATUS_CODES[ res.statusCode ];
 
-            return new Error( 'expected ' + status + ' "' + a + '", got ' + res.status + ' "' + b + '"' );
+            return new Error( 'expected ' + status + ' "' + a + '", got ' + res.statusCode + ' "' + b + '"' );
         }
     }
 
