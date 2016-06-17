@@ -12,13 +12,50 @@ You can import either via CommonJS or ES6, depending on what you're using.
 var mockRequest = require( 'spyrr' );
 ```
 
-or 
+or, ES6:
 
 ```javascript
 import mockRequest from 'spyrr';
 ```
 
 ## Test a request/response, and spy on inner methods
+
+### ES5:
+
+```javascript
+import controller from './routes/endpoint.js';
+
+describe( 'POST /endpoint', function() {
+
+    var someTestObject = { test: true };
+
+    beforeEach( function() {
+
+        spyOn( controller.endpoint, 'checkAuthorization' ).and.callFake( function() {
+
+            return false;
+        });
+    });
+
+    it( 'should reject requests with an invalid auth token', function( done ) {
+
+        mockRequest( controller.endpoint )
+            .params( { path: 'testpath', id: 'my-test' } )
+            .query( { authToken: 'someInvalidToken' } )
+            .body( { someObject: someTestObject } )
+            .expect( 'Content-Type', /json/ )
+            .expect( 401, {
+
+                    error: true
+                }, done 
+            )
+        ;
+    });
+});
+
+```
+
+### ES6:
 
 ```javascript
 import controller from './routes/endpoint.js';
