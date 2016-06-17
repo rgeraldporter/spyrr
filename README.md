@@ -64,7 +64,7 @@ describe( 'POST /endpoint', () => {
 
     let someTestObject = { test: true };
 
-    beforeEach( function() {
+    beforeEach( () => {
 
         spyOn( controller.endpoint, 'checkAuthorization' ).and.callFake( () => {
 
