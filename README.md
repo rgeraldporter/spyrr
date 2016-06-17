@@ -23,7 +23,7 @@ import mockRequest from 'spyrr';
 ### ES5:
 
 ```javascript
-import controller from './routes/endpoint.js';
+var controller = require( './routes/endpoint.js' );
 
 describe( 'POST /endpoint', function() {
 
