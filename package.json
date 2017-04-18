@@ -3,7 +3,7 @@
   "author": "Rob Porter",
   "description": "Create and test actions against server request/response without spinning up a live server",
   "readmeFilename": "README.md",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "main": "./app/spyrr.js",
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -18,9 +18,6 @@
     "gulp-shell": "^0.5.2",
     "run-sequence": "^1.1.5",
     "should": "^8.2.2"
-  },
-  "engines": {
-    "node": "0.10.33"
   },
   "repository": {
     "type": "git",
